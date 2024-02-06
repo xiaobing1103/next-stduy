@@ -1,8 +1,8 @@
-
+2
 import { db } from '@/db'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-
+import * as actions from '@/actions'
 interface ShowpageProps {
     params: {
         id: string
@@ -10,23 +10,26 @@ interface ShowpageProps {
     searchParams: object
 }
 export default async function Showpage(props: ShowpageProps) {
+    await new Promise((r) => setTimeout(r, 2000))
     const { params: { id } } = props
     const snippets = await db.snippet.findFirst({
         where: { id: Number(id) }
     })
-    // await setTimeout(() => {
-    if (!snippets) {
-        return <div>自定义notFound方法的</div>
-    }
-    // }, 2000)
 
+    if (!snippets) {
+        return notFound
+    }
+
+    const deleteSnippetAction = actions.deleteSnippet.bind(null, snippets.id)
     return (
         <div>
             <div className='flex m-4 justify-between items-center'>
                 <h1 className='text-xl font-bold'>{snippets?.title}</h1>
                 <div className='flex g'>
                     <Link href={`${snippets.id}/edit`} className='p-2 border rounded'>Edit</Link>
-                    <Link href={`${snippets.id}/detele`} className='p-2 border rounded'>Detele</Link>
+                    <form action={deleteSnippetAction}>
+                        <button type='submit' className='p-2 border rounded'>删除</button>
+                    </form>
                 </div>
             </div>
             <pre className='p-3 border rounded bg-gray-200 border-gray-200'>
