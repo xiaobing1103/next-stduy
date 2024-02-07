@@ -8,12 +8,11 @@ interface SinppentEditFormProps {
     snippent: Snippet
 }
 export default function SinppentEditForm({ snippent }: SinppentEditFormProps) {
-
     const [code, setCode] = useState(snippent.code)
     const onchangeFn = (value: string = '') => {
-        console.log(value)
+        setCode(value)
     }
-    const editSnippetAction = actions.editSnippet.bind(null, snippent.id, snippent.code)
+    const editSnippetAction = actions.editSnippet.bind(null, snippent.id, code)
 
     return (
         <div>
