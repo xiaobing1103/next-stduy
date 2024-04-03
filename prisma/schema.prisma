@@ -15,3 +15,12 @@ model Snippet {
   title String
   code  String
 }
+
+model userInfo {
+  id       String  @id @default(uuid())
+  userName String  @unique
+  passWord String
+  email    String
+  Phone    String?
+  wxId     String?
+}

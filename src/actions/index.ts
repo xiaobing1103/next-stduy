@@ -3,6 +3,8 @@
 import { db } from "@/db";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { UserInfo } from "./userDatas";
+
 export async function editSnippet(id: number, code: string) {
   console.log(id, code);
   await db.snippet.update({
@@ -60,6 +62,123 @@ export async function createSnippent(
     }
   }
   // 提交后返回home页面
+  revalidatePath("/");
+  redirect("/");
+}
+
+export async function LoginUserInfo(
+  formState: { message: string },
+  userInfo: FormData
+) {
+  const userName = userInfo.get("userName") as string;
+  const passWord = userInfo.get("passWord") as string;
+  console.log(userName);
+  console.log(passWord);
+
+  // 先找到用户是否存在然后再进行登录逻辑
+  const user = await db.userInfo.findUnique({
+    where: {
+      userName: userName,
+    },
+    select: {
+      id: true,
+      passWord: true,
+      email: true,
+    },
+  });
+  console.log(user);
+  if (user) {
+    // 使用 bcrypt 比较密码
+
+    // const passwordMatch = await bcrypt.compare(passWord, user.passWord);
+    if (user.passWord == passWord) {
+      // 密码匹配，登录成功
+      return {
+        message: `用户 ${user.email} 登录成功, 欢迎回来！`,
+      };
+    } else {
+      // 密码不匹配
+      return {
+        message: "密码错误，请重试！",
+      };
+    }
+  } else {
+    // 用户不存在
+    return {
+      message: "用户不存在，请先注册账户！",
+    };
+  }
+}
+export async function createUserInfo(
+  formState: { message: string },
+  userInfo: FormData
+) {
+  // 清楚所有数据
+  // await db.userInfo.deleteMany({});
+  //查找所有数据
+  // const allUsers = await db.userInfo.findMany();
+  // console.log(allUsers);
+  // 确认用户输入的有效的输入值
+  // 检查是否存在相同的userName
+
+  try {
+    const userName = userInfo.get("userName") as string;
+    const email = userInfo.get("email") as string;
+    const passWord = userInfo.get("passWord") as string;
+    console.log(userName);
+    console.log(email);
+    console.log(passWord);
+    // 如果存在相同的username就不给存入了
+    const existingUser = await db.userInfo.findUnique({
+      where: {
+        userName: userName,
+      },
+    });
+    if (existingUser) {
+      return {
+        message: "用户名已经存在",
+      };
+    }
+    // 定义密码的正则
+    const passWordReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$/;
+    if (typeof userName !== "string" || userName.length < 8) {
+      return {
+        message: "用户名需要大于8个字符",
+      };
+    }
+    // 定义验证邮箱的正则
+    const emailReg = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (typeof email !== "string" || !emailReg.test(email)) {
+      return {
+        message: "邮箱格式不正确!",
+      };
+    }
+
+    if (typeof passWord !== "string" || !passWordReg.test(passWord)) {
+      return {
+        message:
+          "密码至少8个字符长，最多20个字符，至少包含一个小写字母和大写字母以及数字",
+      };
+    }
+    // 数据库的增加操作
+    await db.userInfo.create({
+      data: {
+        userName,
+        passWord,
+        email,
+      },
+    });
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      return { message: err.message };
+    } else {
+      return {
+        message: "发生了致命的错误...",
+      };
+    }
+  }
+  // 提交后返回home页面
+  console.log("存入数据库成功！");
   revalidatePath("/");
   redirect("/");
 }
