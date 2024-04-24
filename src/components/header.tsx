@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { Key, useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -26,7 +26,7 @@ import { usePathname } from "next/navigation";
 import { useFormState } from "react-dom";
 import * as actions from "@/actions";
 export default function Header() {
-  const [selected, setSelected] = React.useState("login");
+  const [selected, setSelected] = React.useState<string | any>("login");
 
   const [fromState, action] = useFormState(actions.LoginUserInfo, {
     message: "",
@@ -97,7 +97,7 @@ export default function Header() {
                     size="md"
                     aria-label="Tabs form"
                     selectedKey={selected}
-                    onSelectionChange={setSelected}
+                    onSelectionChange={(key: Key) => setSelected(key)}
                   >
                     <Tab key="login" title="登录">
                       <form

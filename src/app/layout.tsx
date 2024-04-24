@@ -26,7 +26,7 @@ export default function RootLayout({
       {/* className={inter.className} */}
       <body>
         <Providers>
-          <Header />  
+          <Header />
           <div className="c1ontainer mx-auto px-48">{children}</div>
         </Providers>
       </body>

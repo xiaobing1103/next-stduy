@@ -44,9 +44,9 @@ export default async function Showpage(props: ShowpageProps) {
   );
 }
 
-// export async function generateStaticParamas() {
-//   const snippets = await db.snippet.findMany();
-//   return snippets.map((snippet) => {
-//     return { id: snippet.id };
-//   });
-// }
+export async function generateStaticParams() {
+  const snippets = await db.snippet.findMany();
+  return snippets.map((snippet) => {
+    return { id: snippet.id.toString() };
+  });
+}
