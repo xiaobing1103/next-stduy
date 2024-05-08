@@ -11,7 +11,12 @@ if (!GITHUB_CLIENT_ID || !GITHUB_CLIENT_SECRET) {
   throw Error("没有github验证id！！！");
 }
 
-NextAuth({
+export const {
+  handlers: { GET, POST },
+  auth,
+  signOut,
+  signIn,
+} = NextAuth({
   adapter: PrismaAdapter(db),
   providers: [
     Github({ clientId: GITHUB_CLIENT_ID, clientSecret: GITHUB_CLIENT_SECRET }),
