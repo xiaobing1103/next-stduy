@@ -11,17 +11,8 @@ import {
   Input,
   Link,
   Button,
-  Card,
-  CardBody,
-  CardHeader,
 } from "@nextui-org/react";
-import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from "@nextui-org/react";
+import { Modal, ModalContent, ModalHeader, ModalBody } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
 import { useFormState } from "react-dom";
 import * as actions from "@/actions";
@@ -37,11 +28,11 @@ export default function Header() {
   const router = usePathname();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
-    <div className="w-full  text-black z-10 bg-slate-600">
+    <div className="w-full sm:flex-row mx-auto px-3 py-6 text-black z-10 bg-slate-600">
       <Navbar>
         <NavbarBrand>
           <Link href="/" className="font-bold text-inherit">
-            YYAI
+            LLAI
           </Link>
         </NavbarBrand>
         <NavbarContent className="hidden sm:flex gap-4" justify="center">

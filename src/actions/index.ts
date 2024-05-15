@@ -5,14 +5,17 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { UserInfo } from "./userDatas";
 
-export async function editSnippet(id: number, code: string) {
-  console.log(id, code);
+export const editSnippet = async (
+  id: number,
+  { code, title }: { code: string; title: string }
+) => {
+  console.log(this, id, code, title);
   await db.snippet.update({
     where: { id },
-    data: { code },
+    data: { code, title },
   });
   redirect(`/snippent/${id}`);
-}
+};
 
 export async function deleteSnippet(id: number) {
   await db.snippet.delete({

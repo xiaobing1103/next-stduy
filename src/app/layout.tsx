@@ -27,7 +27,9 @@ export default function RootLayout({
       <body>
         <Providers>
           <Header />
-          <div className="c1ontainer mx-auto px-48">{children}</div>
+          <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-20 xl:px-48">
+            {children}
+          </div>
         </Providers>
       </body>
     </html>
