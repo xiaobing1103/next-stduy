@@ -47,24 +47,24 @@ export default function Header() {
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
           <NavbarItem isActive={router == "/detail"}>
             <Link
-              color={router == "/detail" ? "foreground" : "primary"}
-              href="detail"
+              color={router == "/detail" ? "primary" : "foreground"}
+              href="/detail"
             >
               详情
             </Link>
           </NavbarItem>
-          <NavbarItem isActive={router == "/page"}>
+          <NavbarItem isActive={router == "/preform"}>
             <Link
-              color={router == "/page" ? "foreground" : "primary"}
-              href="preform"
+              color={router == "/preform" ? "primary" : "foreground"}
+              href="/preform"
             >
               更多
             </Link>
           </NavbarItem>
           <NavbarItem isActive={router == "/goods"}>
             <Link
-              color={router == "/goods" ? "foreground" : "primary"}
-              href="goods"
+              color={router == "/goods" ? "primary" : "foreground"}
+              href="/goods"
             >
               商品
             </Link>
@@ -164,7 +164,7 @@ export default function Header() {
                           name="passWord"
                         />
                         <p className="text-center text-small">
-                          已经有账号了?{"   "}
+                          已经有账号了?
                           <Link size="sm" onPress={() => setSelected("login")}>
                             去登录
                           </Link>

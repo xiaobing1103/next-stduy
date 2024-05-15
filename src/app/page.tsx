@@ -20,6 +20,7 @@ export default async function HomePage() {
   return (
     <main>
       {/* <header className="flex bg-gray-600 ">头部</header> */}
+
       <div className="flex m-2 justify-between items-center">
         <h1 className="text-xl font-bold">代码列表</h1>
         <Link href={"/snippent/new"}>

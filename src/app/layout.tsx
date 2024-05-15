@@ -18,9 +18,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const Header = dynamic(() => import("@/components/header"), {
-    ssr: false,
-  });
+  // const Header = dynamic(() => import("@/components/header"), {
+  //   ssr: false,
+  // });
   return (
     <html lang="en">
       {/* className={inter.className} */}
