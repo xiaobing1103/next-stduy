@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import cat from '@/images/12.jpg'
 import Hero from "@/components/hero";
 export default function Preform() {

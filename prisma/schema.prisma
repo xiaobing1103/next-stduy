@@ -16,6 +16,13 @@ model Snippet {
   code  String
 }
 
+model TextBlog {
+  id              Int      @id @default(autoincrement())
+  blogTitle       String
+  createdsTime    DateTime @default(now())
+  blogShowContent String
+}
+
 model userInfo {
   id       String  @id @default(uuid())
   userName String  @unique

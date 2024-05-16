@@ -9,11 +9,11 @@ import {
   Tabs,
   Tab,
   Input,
-  Link,
   Button,
 } from "@nextui-org/react";
 import { Modal, ModalContent, ModalHeader, ModalBody } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { useFormState } from "react-dom";
 import * as actions from "@/actions";
 export default function Header() {
@@ -28,7 +28,7 @@ export default function Header() {
   const router = usePathname();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
-    <div className="w-full sm:flex-row mx-auto px-3 py-6 text-black z-10 bg-slate-600">
+    <div className="w-full sm:flex-row mx-auto text-black z-10 bg-slate-600">
       <Navbar>
         <NavbarBrand>
           <Link href="/" className="font-bold text-inherit">
@@ -63,7 +63,7 @@ export default function Header() {
         </NavbarContent>
         <NavbarContent justify="end">
           <NavbarItem className="hidden lg:flex">
-            <Link href="#" onPress={onOpen}>
+            <Link href="#" onClick={onOpen}>
               Login
             </Link>
           </NavbarItem>
@@ -111,13 +111,10 @@ export default function Header() {
                           name="passWord"
                         />
                         <p className="text-center text-small">
-                          还没有账户?{" "}
-                          <Link
-                            size="sm"
-                            onPress={() => setSelected("sign-up")}
-                          >
+                          还没有账户?
+                          <Button onClick={() => setSelected("sign-up")}>
                             去注册
-                          </Link>
+                          </Button>
                         </p>
                         {fromState.message && (
                           <div className="my-2 p-2 bg-red-200 border rounded border-red-400 ">
@@ -156,9 +153,9 @@ export default function Header() {
                         />
                         <p className="text-center text-small">
                           已经有账号了?
-                          <Link size="sm" onPress={() => setSelected("login")}>
+                          <Button onClick={() => setSelected("login")}>
                             去登录
-                          </Link>
+                          </Button>
                         </p>
                         {signFromState?.message && (
                           <div className="my-2 p-2 bg-red-200 border rounded border-red-400 ">
@@ -175,15 +172,6 @@ export default function Header() {
                   </Tabs>
                 </div>
               </ModalBody>
-
-              {/* <ModalFooter>
-                  <Button color="danger" variant="light" onPress={onClose}>
-                    取消
-                  </Button>
-                  <Button type="submit" color="primary">
-                    登录
-                  </Button>
-                </ModalFooter> */}
             </>
           )}
         </ModalContent>
