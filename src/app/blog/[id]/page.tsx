@@ -2,6 +2,8 @@ import notFound from "@/app/not-found";
 import React, { useState } from "react";
 
 import TextareaClient from "@/components/markDown";
+import CommonSidebar from "@/components/commonSiderBar";
+import ComonLayout from "@/components/ComonLayout";
 // const markdown = "# Hi, *Pluto*!";
 
 interface ShowpageProps {
@@ -43,8 +45,9 @@ export default async function Showblog(props: ShowpageProps) {
     return notFound;
   }
   return (
-    <div>
+    <ComonLayout showSiderBar={true}>
       <TextareaClient initialMarkdown={initialMarkdown} />
-    </div>
+    </ComonLayout>
   );
 }
+// className="container box-border mx-auto px-4 sm:px-6 md:px-8 lg:px-20 xl:px-48"

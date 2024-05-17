@@ -1,3 +1,72 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+button {
+    border: none;           /* 移除边框 */
+    outline: inherit;       /* 继承父元素的轮廓样式，可能需要手动调整 */
+
+}
+a {
+    text-decoration: none;
+}
+input {
+    border: none;  /* 移除边框 */
+    outline: none; /* 在获得焦点时去除蓝色轮廓线 */
+}
+a:link, a:visited {
+    color: blue;  /* 设置链接的正常和访问过的颜色为蓝色 */
+    text-decoration: none;  /* 去掉下划线 */
+}
+
+a:hover, a:active {
+    color: blue;  /* 鼠标悬停或激活时的颜色也设为蓝色 */
+    text-decoration: underline;  /* 悬停时添加下划线以提供视觉反馈 */
+}
+
+.sidebar { 
+    height:calc(100vh - 65px) ; /* 设置侧边栏高度 */
+    background-color: white; /* 背景色 */
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); /* 阴影效果 */
+    position: absolute; /* 绝对定位 */
+    z-index: 30; /* 层级 */
+    transition: transform 0.3s ease-in-out; /* 过渡动画 */
+    transform: translateX(-100%); /* 默认向左隐藏 */
+  }
+  
+  /* 中等屏幕尺寸及以上时显示侧边栏 */
+  @media (min-width: 768px) {
+    .sidebar {
+      transform: translateX(0); /* 显示侧边栏 */
+    }
+  }
+/* h1 {
+    font-size: 2em;    
+    font-weight: bold; 
+    margin: 0.67em 0;
+}
+h2 {
+    font-size: 1.5em;   
+    font-weight: bold;
+    margin: 0.83em 0;
+}
+h3 {
+    font-size: 1.17em;  
+    font-weight: bold;
+    margin: 1em 0;
+}
+h4 {
+    font-size: 1em;     
+    font-weight: bold;
+    margin: 1.33em 0;
+}
+h5 {
+    font-size: 0.83em;  
+    font-weight: bold;
+    margin: 1.67em 0;
+}
+h6 {
+    font-size: 0.67em;  
+    font-weight: bold;
+    margin: 2.33em 0;
+} */

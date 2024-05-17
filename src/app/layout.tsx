@@ -13,10 +13,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="p-0 m-0 list-none">
         <Providers>
-          <Header />
-          <div className="container box-border mx-auto px-4 sm:px-6 md:px-8 lg:px-20 xl:px-48">
-            {children}
-          </div>
+          <div>{children}</div>
         </Providers>
       </body>
     </html>

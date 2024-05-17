@@ -32,16 +32,16 @@ export default function Header() {
       <Navbar>
         <NavbarBrand>
           <Link href="/" className="font-bold text-inherit">
-            LLAI
+            强哥博客
           </Link>
         </NavbarBrand>
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
-          <NavbarItem isActive={router == "/detail"}>
+          <NavbarItem isActive={router == "/blog"}>
             <Link
-              color={router == "/detail" ? "primary" : "foreground"}
-              href="/detail"
+              color={router == "/blog" ? "primary" : "foreground"}
+              href="/blog"
             >
-              详情
+              博客
             </Link>
           </NavbarItem>
           <NavbarItem isActive={router == "/preform"}>
@@ -64,12 +64,12 @@ export default function Header() {
         <NavbarContent justify="end">
           <NavbarItem className="hidden lg:flex">
             <Link href="#" onClick={onOpen}>
-              Login
+              登录
             </Link>
           </NavbarItem>
           <NavbarItem>
             <Button as={Link} color="primary" href="#" variant="flat">
-              Sign Up
+              注册
             </Button>
           </NavbarItem>
         </NavbarContent>
@@ -95,7 +95,7 @@ export default function Header() {
                         className="flex flex-col gap-4"
                         action={(payload) => {
                           action(payload);
-                          //  onClose();
+                          onClose();
                         }}
                       >
                         <Input

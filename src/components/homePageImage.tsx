@@ -1,7 +1,5 @@
 "use client";
 import React from "react";
-import HeroImage from "@/images/hero.svg";
-import Image from "next/image";
 import BlogList from "./blogList";
 import shoes from "@/images/shoes-1.png";
 export default function HomePageImage() {
@@ -15,8 +13,8 @@ export default function HomePageImage() {
     },
   ];
   return (
-    <div className="relative h-screen bg-gray-100">
-      <div className="  max-w-screen-lg mx-auto px-3 pt-20 pb-32">
+    <div className="relative bg-gray-100">
+      <div className=" max-w-screen-lg mx-auto px-3 pt-20 pb-32">
         <div className="text-center">
           <h1 className="text-3xl md:text-5xl text-gray-900 font-bold whitespace-pre-line leading-hero">
             日积跬步，以至千里
@@ -28,8 +26,8 @@ export default function HomePageImage() {
             <div className="flex justify-center">
               <img
                 src="/hero.svg"
-                alt="213231"
-                className="mx-auto lg:w-3/5 sm:w-full"
+                alt="Hero Image"
+                className="mx-auto w-full sm:w-4/5 md:w-3/4 lg:w-3/5 xl:w-4/5"
               />
             </div>
           </div>

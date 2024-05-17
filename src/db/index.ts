@@ -27,7 +27,7 @@ async function main() {
 //     title: "title!",
 //     code: "const abc = ()=> console.log(123)",
 //   },
-// });
+// }); 
 
 // db.userInfo.create({
 //   data: {
