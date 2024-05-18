@@ -1,25 +1,22 @@
 import ComonLayout from "@/components/ComonLayout";
-import TextareaClient from "@/components/markDown";
+import NewBlogCom from "@/components/newBlogCom";
+import { db } from "@/db";
 import React from "react";
+interface EditpageProps {
+  params: {
+    id: string;
+  };
+}
+export default async function NewBolg(props: EditpageProps) {
+  const id = parseInt(props.params.id);
+  // const textBlog = await db.textBlog.findFirst({
+  //   where: { id: Number(id) },
+  // });
 
-export default function NewBolg() {
-  const initialMarkdown = `
-   # 这是一个markdown示例
-
-   ## 这是一个markdown示例
-
-   ### 这是一个markdown示例
-
-   ### 这是一个markdown示例
-
-   <div style="color:red;">这是一个html示例</div>
-  `;
   return (
     <ComonLayout>
-      <div className="flex flex-col ">
-        <div className=" py-2 box-border ">新建博客</div>
-        <TextareaClient initialMarkdown={initialMarkdown} />
-      </div>
+      {/* textBlog={textBlog} */}
+      <NewBlogCom />
     </ComonLayout>
   );
 }

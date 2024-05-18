@@ -1,7 +1,8 @@
 import React from "react";
 import Header from "./header";
 import CommonSidebar from "./commonSiderBar";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 interface ComonLayoutProps {
   children: React.ReactNode;
   showSiderBar?: boolean;
@@ -24,6 +25,21 @@ export default function ComonLayout({
           {children}
         </div>
       </div>
+
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+
+      <ToastContainer />
     </div>
   );
 }

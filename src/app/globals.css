@@ -40,6 +40,45 @@ a:hover, a:active {
       transform: translateX(0); /* 显示侧边栏 */
     }
   }
+
+
+  .markdown-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+}
+
+.markdown-table th,
+.markdown-table td {
+    padding: 12px 16px;
+    border: 1px solid #ddd; /* 轻微的边框颜色 */
+    text-align: left;
+}
+
+.markdown-table th {
+    background-color: #f8f8f8; /* 淡灰色背景 */
+    color: #333; /* 标题颜色 */
+}
+
+.markdown-table tr:nth-child(even) {
+    background-color: #f9f9f9; /* 每两行交替颜色 */
+}
+
+.markdown-table tr:hover {
+    background-color: #f1f1f1; /* 鼠标悬停时变色 */
+}
+hr {
+    height: 2px;
+    color: f9f9f9; /* 设置分割线颜色 */
+    margin: 10px 0; /* 设置分割线的上下边距 */
+}
+blockquote {
+    padding: 20px;
+    margin: 0 0 20px;
+    border-left: 5px solid #eee;
+    background-color: #f6f6f6;
+    color: #666;
+}
 /* h1 {
     font-size: 2em;    
     font-weight: bold; 

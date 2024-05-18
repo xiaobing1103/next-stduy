@@ -1,74 +1,54 @@
-"use client";
 import ComonLayout from "@/components/ComonLayout";
-import {
-  Button,
-  //   Table,
-  //   TableBody,
-  //   TableCell,
-  //   TableColumn,
-  //   TableHeader,
-  //   TableRow,
-  //   getKeyValue,
-} from "@nextui-org/react";
+import { Button, Card } from "@nextui-org/react";
 import React from "react";
-import { useRouter } from "next/navigation";
-export default function BlogPage() {
-  const router = useRouter();
-  //   const rows = [
-  //     {
-  //       key: 1,
-  //     },
-  //   ];
+import { db } from "@/db";
+import Link from "next/link";
+type BolgType = {
+  id: number;
+  blogTitle: string;
+  createdsTime: Date;
+  blogShowContent: string;
+};
 
-  //   const columns = [
-  //     {
-  //       key: 1,
-  //       label: "博客列表",
-  //     },
-  //     {
-  //       key: 2,
-  //       label: "fsdfds",
-  //     },
-  //     {
-  //       key: 3,
-  //       label: "fsdfds",
-  //     },
-  //     {
-  //       key: 4,
-  //       label: "fsdfds",
-  //     },
-  //     {
-  //       key: 5,
-  //       label: "fsdfds",
-  //     },
-  //   ];
-
+export default async function BlogPage() {
+  await new Promise((r) => setTimeout(r, 2000));
+  const textBlog = await db.textBlog.findMany({});
+  console.log(textBlog);
   return (
     <ComonLayout>
       <div className="flex flex-col w-3/4 py-2">
-        <div className="flex justify-end">
-          <Button onClick={() => router.push("/blog/newBolg")}>新建博客</Button>
-        </div>
-        <div>
-          {/* <Table aria-label="Example table with dynamic content">
-            <TableHeader>
-              {columns.map((column) => (
-                <TableColumn key={column.key}>{column.label}</TableColumn>
-              ))}
-            </TableHeader>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.key}>
-                  {(columnKey) => (
-                    <TableCell>{getKeyValue(row, columnKey)}</TableCell>
-                  )}
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table> */}
+        <div className="flex justify-end flex-col">
+          <div className="flex justify-between items-center py-3">
+            <div>博客列表</div>
+            <Button>
+              <Link href={"/blog/newBolg"}> 新建博客</Link>
+            </Button>
+          </div>
+          <div className="flex flex-col">
+            {textBlog.length > 0 ? (
+              textBlog?.map((items) => {
+                return (
+                  <Card className="my-3 p-3 box-border">
+                    <div>
+                      博客标题: <span>{items.blogTitle}</span>
+                    </div>
+                    <div>
+                      博客内容:
+                      <span>
+                        {items.blogShowContent.substring(
+                          items.blogShowContent.indexOf("#")
+                        )}
+                      </span>
+                    </div>
+                  </Card>
+                );
+              })
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
       </div>
-      {/* <Button>编辑博客</Button>  */}
     </ComonLayout>
   );
 }

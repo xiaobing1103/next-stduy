@@ -20,6 +20,7 @@ model TextBlog {
   id              Int      @id @default(autoincrement())
   blogTitle       String
   createdsTime    DateTime @default(now())
+  isHotBolg       Boolean
   blogShowContent String
 }
 

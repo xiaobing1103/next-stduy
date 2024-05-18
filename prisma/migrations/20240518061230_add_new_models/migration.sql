@@ -1,0 +1,7 @@
+-- CreateTable
+CREATE TABLE "TextBlog" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "blogTitle" TEXT NOT NULL,
+    "createdsTime" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "blogShowContent" TEXT NOT NULL
+);

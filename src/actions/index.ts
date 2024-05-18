@@ -1,9 +1,7 @@
 "use server";
-
 import { db } from "@/db";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { UserInfo } from "./userDatas";
 
 export const editSnippet = async (
   id: number,
@@ -16,6 +14,75 @@ export const editSnippet = async (
   });
   redirect(`/snippent/${id}`);
 };
+export async function CreateBlog(formData: {
+  blogTitle: string;
+  blogShowContent: string;
+  isHotBolg: boolean;
+}) {
+  try {
+    const blogTitle = formData.blogTitle;
+    const isHotBolg = formData.isHotBolg;
+    const blogShowContent = formData.blogShowContent;
+    // 校验
+    if (typeof blogTitle !== "string" || blogTitle.length < 3) {
+      return {
+        code: 400,
+        message: "标题需要大于三个字符",
+      };
+    }
+    if (typeof blogShowContent !== "string" || blogShowContent.length < 10) {
+      return {
+        code: 400,
+        message: "markdown内容需要大于十个字符",
+      };
+    }
+
+    // 数据库的增加操作
+    await db.textBlog.create({
+      data: {
+        blogTitle,
+        blogShowContent,
+      },
+    });
+    return {
+      code: 200,
+      message: "新增博客成功!",
+    };
+    // throw new Error('数据库保存失败！')
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      return { message: err.message };
+    } else {
+      return {
+        code: 500,
+        message: "发生了致命的错误...",
+      };
+    }
+  }
+}
+
+// export async function CreateBlog(req: NextApiRequest, res: NextApiResponse) {
+//   try {
+//     const { title, code } = req.body;
+//     if (typeof title !== "string" || title.length < 3) {
+//       return res.status(400).json({ message: "标题需要大于三个字符" });
+//     }
+//     if (typeof code !== "string" || code.length < 10) {
+//       return res.status(400).json({ message: "编码需要大于十个字符" });
+//     }
+
+//     const snippet = await db.snippet.create({
+//       data: {
+//         title,
+//         code,
+//       },
+//     });
+
+//     return res.status(200).json(snippet);
+//   } catch (err) {
+//     return res.status(500).json({ message: "数据库保存失败或发生了其他错误" });
+//   }
+// }
 
 export async function deleteSnippet(id: number) {
   await db.snippet.delete({
