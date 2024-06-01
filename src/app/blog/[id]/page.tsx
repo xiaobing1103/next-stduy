@@ -1,10 +1,9 @@
+// pages/showblog/[id].tsx
 import notFound from "@/app/not-found";
-import React, { useState } from "react";
-
-import TextareaClient from "@/components/markDown";
-import CommonSidebar from "@/components/commonSiderBar";
+import React from "react";
 import ComonLayout from "@/components/ComonLayout";
-// const markdown = "# Hi, *Pluto*!";
+import BlogContent from "./BlogContent";
+// 确保路径正确
 
 interface ShowpageProps {
   params: {
@@ -12,42 +11,44 @@ interface ShowpageProps {
   };
   searchParams: object;
 }
-export default async function Showblog(props: ShowpageProps) {
-  await new Promise((r) => setTimeout(r, 2000));
-  const initialMarkdown = `Just a link: www.nasa.gov.
-  # 第一课
-  ## 第二课 
-  A paragraph with *emphasis* and **strong importance**.
 
-  > A block quote with ~strikethrough~ and a URL: https://reactjs.org.
-  This ~is not~ strikethrough, but ~~this is~~!
-  * Lists
-  * [ ] todo
-  * [x] done
-  
-  A table:
-  
-  | a | b |
-  | - | - |
-  # Hi, *Pluto*!
-  ### 今夜(こんや)はもう離(はな)さないでいて
-  ### 帰(かえ)らないでいいよ 朝(あさ)を迎(むか)えて
-  ~~~js
-    console.log('It works!')
-  ~~~
- 
-  `;
-  const {
-    params: { id },
-  } = props;
-  console.log(id);
+export default async function Showblog({ params: { id } }: ShowpageProps) {
+  await new Promise((r) => setTimeout(r, 2000));
+
   if (!id) {
-    return notFound;
+    return notFound();
   }
+
+  const initialFormData = {
+    blogTitle: "博客默认标题",
+    isHotBolg: false,
+    blogShowContent: `# 这是一个markdown示例
+## 这是一个markdown示例
+### 这是一个markdown示例
+### 这是一个markdown示例
+  
+<div style="color:red;">这是一个html示例</div>
+A paragraph with *emphasis* and **strong importance**.
+  
+> A block quote with ~strikethrough~ and a URL: https://reactjs.org.
+  
+* Lists
+* [ ] todo
+* [x] done
+  
+A table:
+  
+| 标题1 | 标题2 | 标题3 |
+|-------|-------|-------|
+| 单元格1 | 单元格2 | 单元格3 |
+| 单元格4 | 单元格5 | 单元格6 |
+  
+This ~is not~ strikethrough, but ~~this is~~! `,
+  };
+
   return (
     <ComonLayout showSiderBar={true}>
-      <TextareaClient initialMarkdown={initialMarkdown} />
+      <BlogContent initialFormData={initialFormData} />
     </ComonLayout>
   );
 }
-// className="container box-border mx-auto px-4 sm:px-6 md:px-8 lg:px-20 xl:px-48"

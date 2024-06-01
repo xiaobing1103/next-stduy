@@ -2,9 +2,9 @@
 import { Button, Input } from "@nextui-org/react";
 import React, { useState } from "react";
 import TextareaClient from "./markDown";
-import * as actions from "@/actions";
-import { useFormState } from "react-dom";
-import { Bounce, toast } from "react-toastify";
+
+import BlogEditBtn from "./blogEditBtn";
+
 interface EditBlogComType {}
 export default function NewBlogCom(props: EditBlogComType) {
   const [formData, setformData] = useState({
@@ -54,54 +54,7 @@ This ~is not~ strikethrough, but ~~this is~~! `,
         </div>
       </div>
       <TextareaClient initialMarkdown={formData} setformData={setformData} />
-      <div className=" h-12 bg-slate-400 absolute  bottom-0 w-full flex items-center justify-end">
-        <div className="mx-2">
-          <Button className="  mr-2" color="secondary" size="sm">
-            返回主页
-          </Button>
-          <Button
-            onClick={() =>
-              actions
-                .CreateBlog(formData)
-                .then((res) => {
-                  if (res?.code == 200) {
-                    console.log(res.message);
-                    toast(res.message, {
-                      position: "top-right",
-                      autoClose: 5000,
-                      hideProgressBar: false,
-                      closeOnClick: true,
-                      pauseOnHover: true,
-                      draggable: true,
-                      progress: undefined,
-                      theme: "light",
-                      transition: Bounce,
-                    });
-                  } else {
-                    toast.error(res.message, {
-                      position: "top-right",
-                      autoClose: 5000,
-                      hideProgressBar: false,
-                      closeOnClick: true,
-                      pauseOnHover: true,
-                      draggable: true,
-                      progress: undefined,
-                      theme: "light",
-                      transition: Bounce,
-                    });
-                  }
-                })
-                .catch((err) => {
-                  console.log(err);
-                })
-            }
-            color="primary"
-            size="sm"
-          >
-            新建博客
-          </Button>
-        </div>
-      </div>
+      <BlogEditBtn formData={formData} />
     </div>
   );
 }
