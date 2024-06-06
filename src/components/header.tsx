@@ -16,9 +16,10 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useFormState } from "react-dom";
 import * as actions from "@/actions";
+// import { auth } from "@/auth";
 export default function Header() {
   const [selected, setSelected] = React.useState<string | any>("login");
-
+  // const session = await auth()
   const [fromState, action] = useFormState(actions.LoginUserInfo, {
     message: "",
   });
@@ -72,6 +73,12 @@ export default function Header() {
               注册
             </Button>
           </NavbarItem>
+          <NavbarItem>
+            { }
+            {/* <Button onClick={actions.signOut}>
+              注销
+            </Button> */}
+          </NavbarItem>
         </NavbarContent>
       </Navbar>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
@@ -93,11 +100,14 @@ export default function Header() {
                     <Tab key="login" title="登录">
                       <form
                         className="flex flex-col gap-4"
-                        action={(payload) => {
-                          action(payload);
-                          onClose();
-                        }}
+                        // action={(payload) => {
+
+                        //   action(payload);
+                        //   onClose();
+                        // }}
+                        action={actions.signIn}
                       >
+
                         <Input
                           isRequired
                           label="用户名/邮箱"
@@ -123,7 +133,7 @@ export default function Header() {
                         )}
                         <div className="flex gap-2 justify-end">
                           <Button fullWidth color="primary" type="submit">
-                            登录
+                            登录但我的委屈
                           </Button>
                         </div>
                       </form>

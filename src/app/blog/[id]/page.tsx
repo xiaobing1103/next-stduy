@@ -3,7 +3,6 @@ import notFound from "@/app/not-found";
 import React from "react";
 import ComonLayout from "@/components/ComonLayout";
 import BlogContent from "./BlogContent";
-// 确保路径正确
 
 interface ShowpageProps {
   params: {

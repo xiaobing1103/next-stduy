@@ -2,7 +2,15 @@
 import { db } from "@/db";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import * as auth from '@/auth'
 
+
+export async function signIn() {
+  return auth.signIn('github')
+}
+export async function signOut() {
+  return auth.signOut()
+}
 export const editSnippet = async (
   id: number,
   { code, title }: { code: string; title: string }
@@ -42,6 +50,7 @@ export async function CreateBlog(formData: {
       data: {
         blogTitle,
         blogShowContent,
+        isHotBolg
       },
     });
     return {

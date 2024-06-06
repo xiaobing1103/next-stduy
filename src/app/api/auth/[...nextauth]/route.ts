@@ -1,4 +1,4 @@
-// import { GET, POST } from "@/app/auth";
+import { GET, POST } from "@/app/auth";
 
 // export async function GET(params: type) {}
 
